@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Circus - Human vs Machine Showdown</title>
+    <!-- Google Fonts for playful, arcade style typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Grandstander:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="carnival-theme">
+    <!-- Playful top navigation -->
+    <nav class="circus-nav">
+        <div class="nav-logo" id="nav-home">🎪 CIRCUS ARENA</div>
+        <div class="nav-links">
+            <button id="nav-btn-arena" class="nav-link hidden">ARENA</button>
+            <button id="nav-btn-how" class="nav-link">HOW IT WORKS</button>
+            <button id="nav-btn-settings" class="nav-link">SETTINGS</button>
+        </div>
+    </nav>
+
+    <!-- Hanging lights bulbs at the top -->
+    <div class="circus-lights">
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+        <span class="bulb"></span>
+    </div>
+
+    <!-- Floating carnival background assets -->
+    <div class="carnival-decorations">
+        <span class="float-item float-balloon">🎈</span>
+        <span class="float-item float-star">⭐</span>
+        <span class="float-item float-sparkle">✨</span>
+        <span class="float-item float-ticket">🎟️</span>
+        <span class="float-item float-balloon-purple">🎈</span>
+        <span class="float-item float-star-gold">⭐</span>
+    </div>
+
+    <!-- Top Circus Canopy Banner -->
+    <div class="circus-canopy">
+        <div class="canopy-scallop"></div>
+        <div class="canopy-scallop"></div>
+        <div class="canopy-scallop"></div>
+        <div class="canopy-scallop"></div>
+        <div class="canopy-scallop"></div>
+    </div>
+
+    <!-- Confetti Explosion Container -->
+    <div id="confetti-container" class="confetti-overlay"></div>
+
+    <div class="app-container">
+        <!-- ================= 1. CARNIVAL LANDING SCREEN ================= -->
+        <section id="screen-landing" class="screen active">
+            <div class="marquee-intro">
+                <div class="circus-welcome-badge" id="e4r4y7">🎪 WELCOME TO THE TIC-TAC-TOE CIRCUS!</div>
+                <h1 class="circus-main-title" id="q5w6e8">
+                    <span class="title-t1">TIC</span>
+                    <span class="title-t2">TAC</span>
+                    <span class="title-t3">TOE</span>
+                </h1>
+                <p class="circus-subtitle" id="q6k2h8">WHERE HUMAN BRAINS MEET MACHINE INTELLIGENCE</p>
+            </div>
+            
+            <div class="button-stack">
+                <button id="btn-to-modes" class="btn btn-circus-primary" data-id="q3w7k1">🎟️ ENTER THE CIRCUS</button>
+                <button id="btn-to-how" class="btn btn-circus-secondary" data-id="u2m8p4">🧠 HOW DOES THE AI THINK?</button>
+            </div>
+        </section>
+
+        <!-- ================= 2. MODE SELECTION SCREEN ================= -->
+        <section id="screen-modes" class="screen hidden">
+            <h2 class="section-title-circus" id="x6f3p2">🎪 CHOOSE YOUR SHOW 🎪</h2>
+            <div class="mode-grid">
+                <div class="circus-mode-card card-cyan" data-mode="pva">
+                    <div class="mode-card-header">
+                        <span class="mode-emoji">🎩</span>
+                        <h3>HUMAN VS AI</h3>
+                    </div>
+                    <p class="card-desc-circus" id="a1x8z3">
+                        <strong>YOU VS THE MACHINE</strong><br>
+                        Think fast. Play smart. Beat the AI.
+                    </p>
+                    <span class="card-ticket-stub"></span>
+                </div>
+                <div class="circus-mode-card card-purple" data-mode="pvp">
+                    <div class="mode-card-header">
+                        <span class="mode-emoji">🤹</span>
+                        <h3>HUMAN VS HUMAN</h3>
+                    </div>
+                    <p class="card-desc-circus" id="b7q4n9">
+                        <strong>FRIEND VS FRIEND</strong><br>
+                        Two players. One board. One winner.
+                    </p>
+                    <span class="card-ticket-stub"></span>
+                </div>
+                <div class="circus-mode-card card-yellow" data-mode="eve">
+                    <div class="mode-card-header">
+                        <span class="mode-emoji">🤖</span>
+                        <h3>AI VS AI</h3>
+                    </div>
+                    <p class="card-desc-circus" id="c5m2k8">
+                        <strong>MACHINE VS MACHINE</strong><br>
+                        Sit back. Watch Minimax battle.
+                    </p>
+                    <span class="card-ticket-stub"></span>
+                </div>
+            </div>
+            <button class="btn-circus-text back-to-landing">RETURN TO FAIRGROUNDS</button>
+        </section>
+
+        <!-- ================= 3. PLAYER SETUP SCREEN ================= -->
+        <section id="screen-setup" class="screen hidden">
+            <h2 class="section-title-circus" id="v7r4x2">🎟️ PREPARE FOR THE SHOW</h2>
+            
+            <div class="circus-setup-box ticket-shape">
+                <!-- Character selection -->
+                <div class="setup-section">
+                    <h4>CHOOSE YOUR CHARACTER</h4>
+                    <div class="symbol-selector-circus">
+                        <button class="symbol-btn-circus active" data-symbol="X">
+                            <span class="circus-symbol-char">❌ X</span>
+                            <span class="circus-symbol-lbl">YOU</span>
+                        </button>
+                        <button class="symbol-btn-circus" data-symbol="O">
+                            <span class="circus-symbol-char">⭕ O</span>
+                            <span class="circus-symbol-lbl">YOU</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Difficulty selection -->
+                <div class="setup-section">
+                    <h4 id="n8b5q1">CHOOSE DIFFICULTY</h4>
+                    <div class="difficulty-tickets">
+                        <button class="diff-ticket-btn" data-diff="easy" id="p1a8k6">
+                            <span class="diff-icon">🌟</span>
+                            <span class="diff-label">EASY</span>
+                        </button>
+                        <button class="diff-ticket-btn" data-diff="medium">
+                            <span class="diff-icon">🎪</span>
+                            <span class="diff-label">MEDIUM</span>
+                        </button>
+                        <button class="diff-ticket-btn" data-diff="hard">
+                            <span class="diff-icon">🔥</span>
+                            <span class="diff-label">HARD</span>
+                        </button>
+                        <button class="diff-ticket-btn active" data-diff="impossible" id="m7z2c9">
+                            <span class="diff-icon">👑</span>
+                            <span class="diff-label">IMPOSSIBLE</span>
+                            <span class="diff-sub-label">THE AI DOES NOT LOSE.</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-stack">
+                <button id="btn-start-game" class="btn btn-circus-primary">ENGAGE PLAY!</button>
+                <button class="btn btn-circus-secondary back-to-modes">BACK</button>
+            </div>
+        </section>
+
+        <!-- ================= 4. MAIN GAME SCREENS ================= -->
+        <section id="screen-game" class="screen hidden">
+            <!-- Game Header -->
+            <div class="game-header-circus">
+                <h2 id="y6c4p8">🎪 TIC-TAC-TOE CIRCUS 🎪</h2>
+                <button id="btn-settings-circus" class="settings-circus-btn">⚙️ Settings</button>
+            </div>
+
+            <!-- Arcade Scoreboard -->
+            <div class="scoreboard-circus ticket-shape">
+                <div class="score-card-circus" id="card-player1">
+                    <span class="score-avatar" id="label-player1-avatar">🎩</span>
+                    <span class="score-title" id="label-player1">YOU</span>
+                    <span class="score-marker">❌</span>
+                    <span class="score-value" id="score-p1">00</span>
+                    <div class="active-arrow">▼</div>
+                </div>
+                <div class="score-card-circus draws">
+                    <span class="score-avatar">🎪</span>
+                    <span class="score-title">DRAWS</span>
+                    <span class="score-value" id="score-draws">00</span>
+                </div>
+                <div class="score-card-circus" id="card-player2">
+                    <span class="score-avatar" id="label-player2-avatar">🤖</span>
+                    <span class="score-title" id="label-player2">AI</span>
+                    <span class="score-marker">⭕</span>
+                    <span class="score-value" id="score-p2">00</span>
+                    <div class="active-arrow">▼</div>
+                </div>
+            </div>
+
+            <!-- Marquee status indicator -->
+            <div class="marquee-signboard">
+                <span id="status-message" data-id="j5n8c3">🎟️ YOUR TURN!</span>
+            </div>
+
+            <!-- Spectator panel -->
+            <div id="spectator-controls" class="spectator-circus-panel hidden">
+                <h4 id="m8q2v5">🤖 VS 🤖 THE GREAT AI SHOWDOWN</h4>
+                <div class="spectator-circus-row">
+                    <button id="btn-spec-play" class="btn btn-circus-primary" data-id="r3n8k4">▶ START</button>
+                    <button id="btn-spec-restart" class="btn btn-circus-secondary">🔄 RESTART</button>
+                </div>
+                <div class="speed-control-circus">
+                    <span id="c6p2w9">SHOW SPEED</span>
+                    <div class="slider-wrapper-circus">
+                        <span>SLOW</span>
+                        <input type="range" id="speed-slider" min="200" max="2000" step="200" value="1000">
+                        <span>FAST</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carnival Board Grid -->
+            <div class="board-wrapper">
+                <div class="circus-board" id="game-board"></div>
+            </div>
+
+            <!-- AI Explanation Panel (Carnival Booth Style) -->
+            <div class="analysis-booth ticket-shape hidden" id="explanation-panel">
+                <div class="booth-header">
+                    <span class="booth-icon">🎪</span>
+                    <h4 id="n4c7x8">🤖 MACHINE'S BRAIN</h4>
+                </div>
+                <div class="booth-grid">
+                    <div class="booth-item">
+                        <span class="item-label">ALGORITHM</span>
+                        <span class="item-value" id="exp-algo">MINIMAX</span>
+                    </div>
+                    <div class="booth-item">
+                        <span class="item-label">SEARCH TYPE</span>
+                        <span class="item-value" id="exp-search">-</span>
+                    </div>
+                    <div class="booth-item">
+                        <span class="item-label">DEPTH</span>
+                        <span class="item-value" id="exp-depth">-</span>
+                    </div>
+                    <div class="booth-item">
+                        <span class="item-label">MOVES</span>
+                        <span class="item-value" id="exp-moves">-</span>
+                    </div>
+                    <div class="booth-item">
+                        <span class="item-label">BEST MOVE</span>
+                        <span class="item-value" id="exp-best">-</span>
+                    </div>
+                    <div class="booth-item">
+                        <span class="item-label">EVALUATION</span>
+                        <span class="item-value" id="exp-eval">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="game-actions">
+                <button id="btn-restart-match" class="btn btn-circus-primary">New Round</button>
+                <button id="btn-back-menu" class="btn-circus-text">QUIT TO FAIRGROUNDS</button>
+            </div>
+        </section>
+
+        <!-- ================= 5. EDUCATIONAL VIEW (INSIDE THE MACHINE) ================= -->
+        <section id="screen-how" class="screen hidden">
+            <h2 class="section-title-circus" id="f8q3n6">🎪 STEP RIGHT UP! SEE HOW THE AI THINKS</h2>
+            
+            <div class="circus-how-scroll ticket-shape">
+                <div class="circus-tree-visual">
+                    <h4>AI SCENARIOS DECISION PATH</h4>
+                    
+                    <!-- Carnival style tree vector -->
+                    <svg viewBox="0 0 400 180" class="circus-tree-svg">
+                        <line x1="200" y1="20" x2="100" y2="80" stroke="#f43f5e" stroke-width="2.5"></line>
+                        <line x1="200" y1="20" x2="200" y2="80" stroke="#a21caf" stroke-width="2.5"></line>
+                        <line x1="200" y1="20" x2="300" y2="80" stroke="#0284c7" stroke-width="2.5"></line>
+                        
+                        <line x1="100" y1="80" x2="100" y2="130" stroke="#f43f5e" stroke-dasharray="3" stroke-width="2"></line>
+                        <line x1="200" y1="80" x2="200" y2="130" stroke="#a21caf" stroke-dasharray="3" stroke-width="2"></line>
+                        <line x1="300" y1="80" x2="300" y2="130" stroke="#0284c7" stroke-dasharray="3" stroke-width="2"></line>
+                        
+                        <!-- Root Node -->
+                        <rect x="140" y="5" width="120" height="30" rx="8" fill="#fef08a" stroke="#ca8a04" stroke-width="2"></rect>
+                        <text x="200" y="24" fill="#a16207" font-size="8" font-family="Fredoka" font-weight="bold" text-anchor="middle">CURRENT BOARD</text>
+                        
+                        <!-- Branch Nodes -->
+                        <rect x="60" y="65" width="80" height="30" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="2"></rect>
+                        <text x="100" y="83" fill="#c2410c" font-size="8" font-family="Fredoka" text-anchor="middle">MOVE A</text>
+
+                        <rect x="160" y="65" width="80" height="30" rx="8" fill="#fae8ff" stroke="#c084fc" stroke-width="2"></rect>
+                        <text x="200" y="83" fill="#7e22ce" font-size="8" font-family="Fredoka" text-anchor="middle">MOVE B</text>
+
+                        <rect x="260" y="65" width="80" height="30" rx="8" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"></rect>
+                        <text x="300" y="83" fill="#0369a1" font-size="8" font-family="Fredoka" text-anchor="middle">MOVE C</text>
+                        
+                        <!-- Terminal Outcomes -->
+                        <circle cx="100" cy="142" r="14" fill="#fecdd3" stroke="#f43f5e" stroke-width="2"></circle>
+                        <text x="100" y="146" fill="#be123c" font-size="10" font-family="Fredoka" font-weight="bold" text-anchor="middle">-10</text>
+                        <text x="100" y="167" fill="#be123c" font-size="7" font-family="Fredoka" text-anchor="middle">AI Loss</text>
+
+                        <circle cx="200" cy="142" r="14" fill="#f5f5f5" stroke="#737373" stroke-width="2"></circle>
+                        <text x="200" y="146" fill="#404040" font-size="10" font-family="Fredoka" text-anchor="middle">0</text>
+                        <text x="200" y="167" fill="#404040" font-size="7" font-family="Fredoka" text-anchor="middle">Draw</text>
+
+                        <circle cx="300" cy="142" r="14" fill="#dcfce7" stroke="#22c55e" stroke-width="2"></circle>
+                        <text x="300" y="146" fill="#15803d" font-size="10" font-family="Fredoka" font-weight="bold" text-anchor="middle">+10</text>
+                        <text x="300" y="167" fill="#15803d" font-size="7" font-family="Fredoka" text-anchor="middle">AI Win</text>
+                    </svg>
+                </div>
+
+                <div class="booth-text-card">
+                    <h3>🎪 STEP RIGHT UP FOR THE LOGIC!</h3>
+                    <p>The AI models possibilities using recursive simulation. It acts as the <strong>MAX</strong> agent, assuming you play as the <strong>MIN</strong> agent to minimize its scores.</p>
+                    <div class="logic-columns">
+                        <div class="logic-col col-red">
+                            <h5>MAX (AI)</h5>
+                            <p>Tries to get the highest score possible.</p>
+                        </div>
+                        <div class="logic-col col-blue">
+                            <h5>MIN (Human)</h5>
+                            <p>Tries to reduce AI score.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booth-text-card" id="x5n8p2">
+                    <h3>🏆 VALUATION SCALE</h3>
+                    <div class="score-line"><span class="lbl">👑 AI WIN</span> <span class="val">+10</span></div>
+                    <div class="score-line"><span class="lbl">🎪 DRAW</span> <span class="val">0</span></div>
+                    <div class="score-line"><span class="lbl">💥 AI LOSS</span> <span class="val">-10</span></div>
+                </div>
+            </div>
+
+            <button class="btn btn-circus-secondary btn-large back-to-landing">RETURN TO FAIRGROUNDS</button>
+        </section>
+    </div>
+
+    <!-- ================= 6. CARNIVAL SETTINGS TICKET MODAL ================= -->
+    <div class="modal-overlay hidden" id="modal-settings">
+        <div class="circus-modal ticket-shape">
+            <h3 id="q7m3v9">🎪 SYSTEM CONFIGURATION</h3>
+            
+            <div class="setting-row-circus">
+                <label>THEME</label>
+                <select id="settings-theme" class="circus-select">
+                    <option value="carnival">🎪 CARNIVAL</option>
+                    <option value="light">🔆 CLASSIC LIGHT</option>
+                </select>
+            </div>
+
+            <div class="setting-row-circus">
+                <label>SOUND EFFECTS</label>
+                <div class="toggle-switch-circus">
+                    <input type="checkbox" id="settings-sound" checked>
+                    <label for="settings-sound"></label>
+                </div>
+            </div>
+
+            <div class="setting-row-circus">
+                <label>ANIMATIONS</label>
+                <div class="toggle-switch-circus">
+                    <input type="checkbox" id="settings-animations" checked>
+                    <label for="settings-animations"></label>
+                </div>
+            </div>
+
+            <div class="setting-row-circus">
+                <label>CONFETTI SHOWERS</label>
+                <div class="toggle-switch-circus">
+                    <input type="checkbox" id="settings-confetti" checked>
+                    <label for="settings-confetti"></label>
+                </div>
+            </div>
+
+            <div class="setting-row-circus">
+                <label>AI EXPLANATION PANEL</label>
+                <div class="toggle-switch-circus">
+                    <input type="checkbox" id="settings-analysis" checked>
+                    <label for="settings-analysis"></label>
+                </div>
+            </div>
+
+            <div class="circus-modal-actions">
+                <button id="btn-reset-scores" class="btn btn-circus-danger">RESET ARCADE SCORE</button>
+                <button id="btn-close-settings" class="btn btn-circus-secondary">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 7. GAME ENGINE OFFLINE PANEL ================= -->
+    <div class="error-overlay hidden" id="error-overlay">
+        <div class="circus-error-box ticket-shape">
+            <span class="circus-error-icon">🎪⚠️</span>
+            <h3>SHOW DELAYED!</h3>
+            <p>Unable to connect to the carnival engine.</p>
+            <button id="btn-retry-conn" class="btn btn-circus-primary" data-id="a8c5m1">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <!-- Script assets -->
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

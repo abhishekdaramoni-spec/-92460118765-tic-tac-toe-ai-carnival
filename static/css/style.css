@@ -1,0 +1,1199 @@
+/* ==========================================
+   CARNIVAL & CLASSIC LIGHT VARIABLES
+   ========================================== */
+.carnival-theme {
+    --bg-color: #fef08a; /* Soft sunny yellow base */
+    --stripes-gradient: repeating-linear-gradient(
+        45deg,
+        #f472b6, /* Pink stripe */
+        #f472b6 40px,
+        #c084fc 40px, /* Purple stripe */
+        #c084fc 80px,
+        #22d3ee 80px, /* Cyan stripe */
+        #22d3ee 120px,
+        #fef08a 120px, /* Yellow stripe */
+        #fef08a 160px
+    );
+    --canopy-bg: #ef4444; /* Bold Red */
+    --canopy-scallop-color: #f59e0b; /* Yellow/Orange */
+    
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: #f59e0b;
+    --text-primary: #1e1b4b;
+    --text-secondary: #4f46e5;
+    
+    --cell-bg-even: #fae8ff;
+    --cell-bg-odd: #e0f2fe;
+    --cell-border: #ca8a04;
+    --cell-hover-border: #ef4444;
+    
+    --color-x: #ea580c; /* Playful Orange */
+    --color-o: #0891b2; /* Playful Cyan */
+    --color-win-bg: #bbf7d0;
+    --color-win-border: #22c55e;
+    
+    --shadow-3d: 0 10px 0 #ca8a04, 0 15px 25px rgba(0, 0, 0, 0.15);
+    --btn-shadow: 0 6px 0 #b45309, 0 10px 15px rgba(0, 0, 0, 0.12);
+    --btn-danger-shadow: 0 6px 0 #be123c, 0 10px 15px rgba(0, 0, 0, 0.12);
+}
+
+.light-theme {
+    --bg-color: #fafaf9; /* Warm White */
+    --stripes-gradient: linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 100%);
+    --canopy-bg: #78716c; /* Warm Gray */
+    --canopy-scallop-color: #d6d3d1;
+    
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: #cbd5e1;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    
+    --cell-bg-even: #f1f5f9;
+    --cell-bg-odd: #ffffff;
+    --cell-border: #94a3b8;
+    --cell-hover-border: #475569;
+    
+    --color-x: #0369a1;
+    --color-o: #86198f;
+    --color-win-bg: #dcfce7;
+    --color-win-border: #16a34a;
+    
+    --shadow-3d: 0 8px 0 #cbd5e1, 0 12px 20px rgba(0, 0, 0, 0.05);
+    --btn-shadow: 0 5px 0 #475569, 0 8px 12px rgba(0, 0, 0, 0.05);
+    --btn-danger-shadow: 0 5px 0 #9f1239, 0 8px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Constants */
+:root {
+    --font-heading: 'Grandstander', sans-serif;
+    --font-body: 'Fredoka', sans-serif;
+    --font-mono: 'Fredoka', monospace;
+    --border-radius-lg: 24px;
+    --border-radius-md: 14px;
+    --transition-speed: 0.25s;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-color);
+    background-image: var(--stripes-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Playful Circus Navigation Bar */
+.circus-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    z-index: 10;
+}
+
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-link {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    color: white;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+    transform: scale(1.05);
+}
+
+.nav-link.hidden {
+    display: none !important;
+}
+
+/* ==========================================
+   CARNIVAL BACKGROUND ASSETS
+   ========================================== */
+/* Scalloped canopy at the top of the screen */
+.circus-canopy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background: var(--canopy-bg);
+    z-index: 5;
+    display: flex;
+    justify-content: space-around;
+    transition: background 0.3s;
+}
+
+.canopy-scallop {
+    width: calc(100% / 5 + 4px);
+    height: 25px;
+    background: var(--canopy-scallop-color);
+    border-radius: 0 0 50% 50%;
+    margin-top: 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s;
+}
+
+/* Hanging Bulbs that softly pulse */
+.circus-lights {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.bulb {
+    width: 12px;
+    height: 12px;
+    background: #fef08a;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fef08a, 0 0 20px #eab308;
+    animation: pulse-bulbs 1.2s infinite alternate ease-in-out;
+}
+
+.bulb:nth-child(even) {
+    animation-delay: 0.6s;
+    background: #f472b6;
+    box-shadow: 0 0 10px #f472b6, 0 0 20px #db2777;
+}
+
+@keyframes pulse-bulbs {
+    from { opacity: 0.4; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.15); }
+}
+
+/* Floating decorations layer */
+.carnival-decorations {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.float-item {
+    position: absolute;
+    font-size: 2.25rem;
+    user-select: none;
+    animation: drift-float 12s infinite linear;
+}
+
+.float-balloon { top: 25%; left: 8%; animation-duration: 15s; }
+.float-star { top: 65%; left: 5%; animation-duration: 18s; animation-delay: -3s; }
+.float-sparkle { top: 15%; right: 8%; animation-duration: 12s; }
+.float-ticket { top: 75%; right: 6%; animation-duration: 20s; }
+.float-balloon-purple { top: 45%; right: 12%; animation-duration: 16s; animation-delay: -5s; font-size: 2.75rem; }
+.float-star-gold { top: 5%; left: 45%; animation-duration: 14s; }
+
+@keyframes drift-float {
+    0% { transform: translateY(120vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+
+/* ==========================================
+   CONFETTI CANVASES-FREE SYSTEM
+   ========================================== */
+.confetti-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 110;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    opacity: 0.9;
+    animation: fall-confetti 3.5s forwards linear;
+}
+
+@keyframes fall-confetti {
+    0% {
+        transform: translateY(-20px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(105vh) rotate(720deg);
+    }
+}
+
+/* ==========================================
+   SCREEN ROUTING & CORE CONTAINER
+   ========================================== */
+.app-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 70px 20px 40px; /* Space under canopy */
+    z-index: 2;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    animation: bounce-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.screen.hidden {
+    display: none !important;
+}
+
+@keyframes bounce-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================
+   1. CARNIVAL LANDING SCREEN
+   ========================================== */
+#screen-landing {
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.circus-welcome-badge {
+    display: inline-block;
+    background: #ea580c;
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    margin-bottom: 8px;
+}
+
+.circus-main-title {
+    font-family: var(--font-heading);
+    font-size: 3.8rem;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    letter-spacing: -2px;
+}
+
+.circus-main-title span {
+    display: block;
+    text-shadow: 0 4px 0 #ca8a04, 0 8px 12px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.title-t1 { color: #f43f5e; transform: rotate(-3deg); }
+.title-t2 { color: #eab308; transform: rotate(2deg); margin-left: 20px; }
+.title-t3 { color: #3b82f6; transform: rotate(-1deg); margin-left: -20px; }
+
+.circus-subtitle {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: #4f46e5;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   2. BATTLE / SHOW SELECTION SCREEN
+   ========================================== */
+.section-title-circus {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 900;
+    text-align: center;
+    color: #ef4444;
+    text-shadow: 0 2px 0 #fef08a;
+    letter-spacing: 0.5px;
+}
+
+.mode-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.circus-mode-card {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: var(--shadow-3d);
+    border: 3.5px solid var(--card-border);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--card-bg);
+}
+
+.card-cyan { --card-border: #06b6d4; --card-decor: #0891b2; }
+.card-purple { --card-border: #a855f7; --card-decor: #8980f5; }
+.card-yellow { --card-border: #ca8a04; --card-decor: #ca8a04; }
+
+.mode-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.mode-emoji {
+    font-size: 1.8rem;
+    transition: transform var(--transition-speed);
+}
+
+.circus-mode-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.card-desc-circus {
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+/* Playful hovers for mode cards */
+.circus-mode-card:hover {
+    transform: translateY(-4px) scale(1.015);
+    box-shadow: 0 14px 0 var(--card-decor), 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.circus-mode-card:hover .mode-emoji {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.circus-mode-card:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 var(--card-decor);
+}
+
+/* ==========================================
+   3. CONFIGURATION STAGE SCREEN
+   ========================================== */
+.circus-setup-box {
+    background: var(--card-bg);
+    border: 3.5px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-shadow: var(--shadow-3d);
+}
+
+.setup-section h4 {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.symbol-selector-circus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.symbol-btn-circus {
+    background: #fae8ff;
+    border: 3px solid #cbd5e1;
+    border-radius: var(--border-radius-md);
+    padding: 14px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all var(--transition-speed);
+}
+
+.symbol-btn-circus:hover {
+    border-color: #94a3b8;
+}
+
+.circus-symbol-char {
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    font-weight: bold;
+}
+
+.circus-symbol-lbl {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.symbol-btn-circus.active[data-symbol="X"] {
+    background: #ffedd5;
+    border-color: var(--color-x);
+    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.15);
+}
+
+.symbol-btn-circus.active[data-symbol="O"] {
+    background: #ecfeff;
+    border-color: var(--color-o);
+    box-shadow: 0 4px 10px rgba(8, 145, 178, 0.15);
+}
+
+/* Difficulty tickets list */
+.difficulty-tickets {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.diff-ticket-btn {
+    background: #f3f4f6;
+    border: 2px dashed #94a3b8;
+    border-radius: var(--border-radius-md);
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all var(--transition-speed);
+}
+
+.diff-ticket-btn:hover {
+    background: #e5e7eb;
+}
+
+.diff-icon {
+    font-size: 1.35rem;
+}
+
+.diff-label {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #475569;
+}
+
+.diff-sub-label {
+    font-size: 0.65rem;
+    color: #64748b;
+    margin-left: auto;
+}
+
+.diff-ticket-btn.active {
+    background: #fef9c3;
+    border: 2.5px solid #ca8a04;
+}
+
+.diff-ticket-btn.active .diff-label {
+    color: #854d0e;
+}
+
+/* ==========================================
+   4. MAIN GAME SCREENS & ARENAS
+   ========================================== */
+.game-header-circus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+}
+
+.game-header-circus h2 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #ef4444;
+}
+
+.settings-circus-btn {
+    background: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.settings-circus-btn:hover {
+    background: #e2e8f0;
+}
+
+/* Scoreboard ticket */
+.scoreboard-circus {
+    background: var(--card-bg);
+    border: 3.5px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-3d);
+    display: grid;
+    grid-template-columns: 1.1fr 0.8fr 1.1fr;
+    gap: 8px;
+    padding: 16px 12px !important;
+}
+
+.score-card-circus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.score-avatar { font-size: 1.5rem; }
+.score-title { font-size: 0.65rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
+.score-marker { font-size: 0.95rem; margin: 2px 0; }
+.score-value { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 900; }
+
+/* Turn Indicators */
+.active-arrow {
+    position: absolute;
+    bottom: -22px;
+    font-size: 0.75rem;
+    color: #ef4444;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all var(--transition-speed);
+}
+
+.score-card-circus.active .active-arrow {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Marquee indicator banner */
+.marquee-signboard {
+    background: #ea580c;
+    border: 3px solid #ca8a04;
+    color: white;
+    border-radius: var(--border-radius-md);
+    padding: 10px;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Spectator mode panels */
+.spectator-circus-panel {
+    background: #fef08a;
+    border: 3px solid #eab308;
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
+
+.spectator-circus-panel h4 {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #a16207;
+}
+
+.spectator-circus-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.speed-control-circus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: #a16207;
+}
+
+.slider-wrapper-circus {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 70%;
+}
+
+.slider-wrapper-circus input {
+    flex: 1;
+    accent-color: #ea580c;
+    height: 6px;
+    cursor: pointer;
+}
+
+/* Circus Board Layout */
+.circus-board {
+    background: #fef9c3; /* Cream board backing */
+    border: 5px solid #ca8a04;
+    border-radius: 20px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    box-shadow: var(--shadow-3d);
+}
+
+.cell {
+    background: #fae8ff;
+    border: 2px solid #ca8a04;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    transition: background-color var(--transition-speed), transform 0.1s, border-color 0.2s;
+    user-select: none;
+}
+
+.cell:nth-child(even) {
+    background: #e0f2fe;
+}
+
+.cell:hover {
+    background: #fef9c3;
+    border-color: #ef4444;
+    transform: translateY(-2px);
+}
+
+.cell:active {
+    transform: translateY(1px);
+}
+
+.cell.disabled {
+    cursor: not-allowed;
+}
+
+/* X Entrance Bounce Animations */
+.cell.x {
+    color: var(--color-x);
+    text-shadow: 0 3px 0 #b45309;
+    animation: draw-x-scale 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes draw-x-scale {
+    from { transform: scale(0) rotate(-20deg); }
+    to { transform: scale(1) rotate(0deg); }
+}
+
+/* O Entrance Bounce Animations */
+.cell.o {
+    color: var(--color-o);
+    text-shadow: 0 3px 0 #0e7490;
+    animation: draw-o-scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.35) forwards;
+}
+
+@keyframes draw-o-scale {
+    0% { transform: scale(0); }
+    65% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+/* Victory indicators */
+.cell.winning {
+    background: var(--color-win-bg) !important;
+    border-color: var(--color-win-border) !important;
+    animation: pulse-win-circus 1.0s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-win-circus {
+    from {
+        box-shadow: 0 0 5px rgba(34, 197, 94, 0.3), inset 0 0 5px rgba(34, 197, 94, 0.2);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(34, 197, 94, 0.7), inset 0 0 10px rgba(34, 197, 94, 0.4);
+        transform: scale(1.03);
+    }
+}
+
+/* ==========================================
+   AI PANEL (CARNIVAL BOOTH)
+   ========================================== */
+.analysis-booth {
+    background: var(--card-bg);
+    border: 3.5px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-3d);
+}
+
+.booth-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px dashed #cbd5e1;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.booth-icon { font-size: 1.5rem; }
+.booth-header h4 {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+}
+
+.booth-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.booth-item {
+    background: #fae8ff;
+    border: 2px solid #e9d5ff;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.booth-item:nth-child(even) {
+    background: #e0f2fe;
+    border-color: #bae6fd;
+}
+
+.item-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 2px;
+}
+
+.item-value {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+/* ==========================================
+   5. HOW IT WORKS (CARNIVAL SHOW ATTRACTION)
+   ========================================== */
+.circus-how-scroll {
+    background: var(--card-bg);
+    border: 3.5px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-3d);
+    max-height: 450px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.circus-tree-visual {
+    background: #fffbeb;
+    border: 2px dashed #ca8a04;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.circus-tree-visual h4 {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: #854d0e;
+    margin-bottom: 10px;
+}
+
+.circus-tree-svg {
+    width: 100%;
+    height: auto;
+}
+
+.booth-text-card {
+    text-align: left;
+}
+
+.booth-text-card h3 {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: #c084fc;
+    margin-bottom: 8px;
+}
+
+.booth-text-card p, .booth-text-card ul {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+.booth-text-card ul {
+    padding-left: 18px;
+    margin-top: 6px;
+}
+
+.logic-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.logic-col {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.col-red { background: #fecdd3; }
+.col-red h5 { font-family: var(--font-heading); font-size: 0.75rem; color: #be123c; margin-bottom: 2px; }
+.col-red p { font-size: 0.7rem; color: #be123c; }
+
+.col-blue { background: #e0f2fe; }
+.col-blue h5 { font-family: var(--font-heading); font-size: 0.75rem; color: #0369a1; margin-bottom: 2px; }
+.col-blue p { font-size: 0.7rem; color: #0369a1; }
+
+.score-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-bottom: 1px dashed #cbd5e1;
+}
+
+.score-line:last-child { border-bottom: none; }
+.score-line .lbl { color: var(--text-secondary); }
+.score-line .val { color: #ef4444; }
+
+/* ==========================================
+   6. CARNIVAL SETTINGS TICKET MODAL
+   ========================================== */
+.modal-overlay, .error-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(124, 58, 237, 0.4); /* Purple overlay */
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 24px;
+    animation: fade-overlay 0.3s;
+}
+
+@keyframes fade-overlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.circus-modal, .circus-error-box {
+    background: var(--card-bg);
+    border: 4px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-3d);
+    width: 100%;
+    max-width: 380px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.circus-modal h3, .circus-error-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 900;
+    text-align: center;
+    color: #ef4444;
+}
+
+.setting-row-circus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #cbd5e1;
+}
+
+.setting-row-circus label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.circus-select {
+    font-family: var(--font-body);
+    background: #fae8ff;
+    border: 2px solid #ca8a04;
+    padding: 4px 8px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+/* Toggle Switches */
+.toggle-switch-circus {
+    position: relative;
+    width: 44px;
+    height: 22px;
+}
+
+.toggle-switch-circus input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-switch-circus label {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #cbd5e1;
+    border-radius: 22px;
+    transition: .3s;
+    border: 2px solid #ca8a04;
+}
+
+.toggle-switch-circus label:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #64748b;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.toggle-switch-circus input:checked + label {
+    background-color: #22c55e;
+}
+
+.toggle-switch-circus input:checked + label:before {
+    transform: translateX(22px);
+    background-color: white;
+}
+
+.circus-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Offline error box */
+.circus-error-box {
+    text-align: center;
+    align-items: center;
+}
+
+.circus-error-icon {
+    font-size: 2.75rem;
+    animation: bounce-error-icon 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes bounce-error-icon {
+    from { transform: translateY(-5px); }
+    to { transform: translateY(5px); }
+}
+
+.circus-error-box p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* ==========================================
+   7. TICKETS & BUTTONS
+   ========================================== */
+.btn {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 900;
+    padding: 12px 24px;
+    border: 3px solid #ca8a04;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-circus-primary {
+    background: #eab308;
+    color: #78350f;
+    box-shadow: var(--btn-shadow);
+}
+
+.btn-circus-primary:hover {
+    background: #facc15;
+}
+
+.btn-circus-primary:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #b45309;
+}
+
+.btn-circus-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #94a3b8;
+    box-shadow: 0 6px 0 #94a3b8, 0 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.btn-circus-secondary:hover {
+    background: #f8fafc;
+}
+
+.btn-circus-secondary:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #94a3b8;
+}
+
+.btn-circus-danger {
+    background: #f43f5e;
+    color: white;
+    border-color: #be123c;
+    box-shadow: var(--btn-danger-shadow);
+}
+
+.btn-circus-danger:hover {
+    background: #fb7185;
+}
+
+.btn-circus-danger:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #be123c;
+}
+
+.btn-circus-text {
+    background: transparent;
+    border: none;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #4f46e5;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-circus-text:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+.button-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.game-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Visibility Helper */
+.hidden {
+    display: none !important;
+}
+
+/* Accessibility settings for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        transition-duration: 0s !important;
+    }
+    .float-item, .bulb, .circus-lights, .confetti-particle {
+        animation: none !important;
+    }
+}
+
+/* Responsiveness Settings */
+@media (max-width: 480px) {
+    .app-container {
+        padding: 50px 16px 20px;
+    }
+    .circus-main-title {
+        font-size: 3rem;
+    }
+    .cell {
+        font-size: 2.25rem;
+    }
+}
