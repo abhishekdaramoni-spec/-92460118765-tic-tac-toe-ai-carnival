@@ -132,3 +132,48 @@ Run the automated test suite directly:
 ```bash
 python tests/test_game.py
 ```
+# 🎪 Tic-Tac-Toe AI Carnival
+
+> **Where Human Brains Meet Machine Intelligence**
+
+🔗 **Live Demo:**  
+https://92460118765-tic-tac-toe-ai-carnival.vercel.app/
+
+---
+
+## 🎮 Game Modes
+
+- 🎩 Human vs AI
+- 👥 Human vs Human
+- 🤖 AI vs AI
+
+## 🧠 AI
+
+- Adversarial Search
+- Minimax Algorithm
+- Multiple Difficulty Levels
+- AI Move Evaluation
+
+## 🎪 Features
+
+- 🌈 Vibrant Carnival UI
+- 🎉 Confetti & Animations
+- ❌ X / ⭕ O Selection
+- 🏆 Score Tracking
+- ⚙️ Settings
+- 🔊 Sound Controls
+- 📱 Responsive Design
+
+---
+
+## 🎯 Play Now
+
+### 🎟️ Enter the Carnival
+
+**[Play Tic-Tac-Toe AI](https://92460118765-tic-tac-toe-ai-carnival.vercel.app/)**
+
+---
+
+### 👨‍💻 Author
+
+**Abhishek Daramoni**
