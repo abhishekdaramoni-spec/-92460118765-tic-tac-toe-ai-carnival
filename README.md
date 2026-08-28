@@ -170,7 +170,7 @@ https://92460118765-tic-tac-toe-ai-carnival.vercel.app/
 
 ### 🎟️ Enter the Carnival
 
-**[Play Tic-Tac-Toe AI](https://92460118765-tic-tac-toe-ai-carnival.vercel.app/)**
+**[Play Tic-Tac-Toe AI](https://tic-tac-toe-ai-carnival.vercel.app/)**
 
 ---
 
